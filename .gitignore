@@ -1,0 +1,55 @@
+# Phoenixx Enterprises - Git Ignore File
+
+# IMPORTANT: Protect sensitive files
+# Never commit files with passwords or API keys
+
+# Environment variables (if you create them later)
+.env
+.env.local
+.env.production
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# Logs
+*.log
+error_log
+debug.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Don't commit node_modules if you add npm later
+node_modules/
+
+# WordPress (if you add it later)
+wp-config.php
+wp-content/uploads/
+
+# Database backups
+*.sql
+*.sqlite
+
+# FTP credentials (if you store them)
+ftp-credentials.txt
+credentials.txt
+
+# Email configuration with password
+# NOTE: send-email.php will be committed but you should
+# remove the password before committing or use environment variables
