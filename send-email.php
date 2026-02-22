@@ -16,7 +16,7 @@ ini_set('display_errors', 0);
 define('SMTP_HOST', 'smtp.hostinger.com');
 define('SMTP_PORT', 587); // or 465 for SSL
 define('SMTP_USERNAME', 'rsoml@phxxrising.org');
-define('SMTP_PASSWORD', 'YOUR_EMAIL_PASSWORD_HERE'); // Replace with your email password
+define('SMTP_PASSWORD', 'OASDFfefsaf@#1112'); 
 define('FROM_EMAIL', 'rsoml@phxxrising.org');
 define('FROM_NAME', 'Phoenixx Enterprises Contact Form');
 define('TO_EMAIL', 'rsoml@phxxrising.org'); // Where form submissions go

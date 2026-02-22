@@ -570,6 +570,42 @@ body {
     background: var(--black);
 }
 
+/* Nested service lists - align to the right */
+.service-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+    flex-wrap: wrap;  /* Allow wrapping on mobile */
+}
+
+.service-list li > ul {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.95rem;
+    color: var(--mid-gray);
+    font-style: italic;
+    text-align: right;  /* Align text to the right */
+    margin-left: auto;  /* Push to the right side */
+}
+
+.service-list li > ul li {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.service-list li > ul li:before {
+    content: "• ";
+    color: var(--primary-red);
+    margin-right: 5px;
+}
+
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -790,6 +826,46 @@ body {
     background: var(--charcoal);
     padding: 3rem;
     border-left: 4px solid var(--primary-red);
+}
+
+/* Fix for tablets and smaller laptops */
+@media (max-width: 1200px) {
+    .calendar-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .calendar-info {
+        text-align: center;
+    }
+}
+
+/* Mobile specific fix */
+@media (max-width: 768px) {
+    .calendar-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .calendar-embed iframe {
+        height: 400px;
+    }
+}
+
+.calendar-info .btn {
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+/* Mobile button fix */
+@media (max-width: 768px) {
+    .calendar-info {
+        padding: 2rem;
+    }
+    
+    .calendar-info .btn {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 .calendar-info p {
