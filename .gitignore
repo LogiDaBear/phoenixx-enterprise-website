@@ -35,7 +35,7 @@ temp/
 # if adding npm 
 node_modules/
 send-email.php
-.php
+
 wp-config.php
 wp-content/uploads/
 
