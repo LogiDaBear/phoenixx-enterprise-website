@@ -344,3 +344,81 @@ function setupEmailIntegration() {
 
 console.log('Phoenixx Enterprises Website Loaded');
 console.log('Rise. So others may live.');
+
+// About Section Carousel
+class AboutCarousel {
+    constructor() {
+        this.slides = document.querySelectorAll('.about-slide');
+        this.currentSlide = 0;
+        this.dotsContainer = document.querySelector('.about-carousel-dots');
+        
+        if (this.slides.length === 0) return;
+        
+        this.init();
+    }
+    
+    init() {
+        // Create dots
+        this.slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'about-carousel-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => this.goToSlide(index));
+            this.dotsContainer.appendChild(dot);
+        });
+        
+        this.dots = document.querySelectorAll('.about-carousel-dot');
+        
+        // Button controls
+        const prevBtn = document.querySelector('.about-carousel-btn.prev');
+        const nextBtn = document.querySelector('.about-carousel-btn.next');
+        
+        if (prevBtn) prevBtn.addEventListener('click', () => this.prevSlide());
+        if (nextBtn) nextBtn.addEventListener('click', () => this.nextSlide());
+        
+        // Auto-advance every 5 seconds
+        this.startAutoPlay();
+        
+        // Pause on hover
+        const imageFrame = document.querySelector('.about-image');
+        if (imageFrame) {
+            imageFrame.addEventListener('mouseenter', () => this.stopAutoPlay());
+            imageFrame.addEventListener('mouseleave', () => this.startAutoPlay());
+        }
+    }
+    
+    goToSlide(index) {
+        this.slides[this.currentSlide].classList.remove('active');
+        this.dots[this.currentSlide].classList.remove('active');
+        
+        this.currentSlide = index;
+        
+        this.slides[this.currentSlide].classList.add('active');
+        this.dots[this.currentSlide].classList.add('active');
+    }
+    
+    nextSlide() {
+        const next = (this.currentSlide + 1) % this.slides.length;
+        this.goToSlide(next);
+    }
+    
+    prevSlide() {
+        const prev = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+        this.goToSlide(prev);
+    }
+    
+    startAutoPlay() {
+        this.autoPlayInterval = setInterval(() => this.nextSlide(), 5000);
+    }
+    
+    stopAutoPlay() {
+        if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+        }
+    }
+}
+
+// Initialize about carousel
+if (document.querySelector('.about-carousel')) {
+    new AboutCarousel();
+}

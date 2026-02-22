@@ -1,9 +1,6 @@
 # Phoenixx Enterprises - Git Ignore File
 
-# IMPORTANT: Protect sensitive files
-# Never commit files with passwords or API keys
-
-# Environment variables (if you create them later)
+# Environment variables
 .env
 .env.local
 .env.production
@@ -35,10 +32,10 @@ tmp/
 temp/
 *.tmp
 
-# Don't commit node_modules if you add npm later
+# if adding npm 
 node_modules/
 
-# WordPress (if you add it later)
+# WordPress
 wp-config.php
 wp-content/uploads/
 
@@ -46,7 +43,7 @@ wp-content/uploads/
 *.sql
 *.sqlite
 
-# FTP credentials (if you store them)
+# FTP credentials
 ftp-credentials.txt
 credentials.txt
 
