@@ -104,42 +104,6 @@ if (document.querySelector('.testimonial-carousel')) {
     new TestimonialCarousel();
 }
 
-// QR Code Generation
-function generateQRCode() {
-    const qrContainer = document.getElementById('qrcode');
-    if (!qrContainer) return;
-    
-    // Create vCard data for business card
-    const vCard = `BEGIN:VCARD
-VERSION:3.0
-FN:Phoenixx Enterprises
-ORG:Phoenixx Enterprises
-TITLE:Safety & Security Training
-EMAIL:phoenixxenterprises@gmail.com
-ADR:;;Columbus;OH;;USA
-URL:https://phoenixxenterprises.com
-NOTE:Rise. So others may live.
-END:VCARD`;
-    
-    // Generate QR code
-    new QRCode(qrContainer, {
-        text: vCard,
-        width: 200,
-        height: 200,
-        colorDark: "#0D0D0D",
-        colorLight: "#F8F9FA",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-}
-
-// Initialize QR code when page loads
-if (typeof QRCode !== 'undefined') {
-    generateQRCode();
-} else {
-    // Retry after script loads
-    setTimeout(generateQRCode, 500);
-}
-
 // Contact Form Handling
 const contactForm = document.getElementById('contactForm');
 
