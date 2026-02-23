@@ -143,27 +143,66 @@ if (typeof QRCode !== 'undefined') {
 // Contact Form Handling
 const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        service: document.getElementById('service').value,
-        message: document.getElementById('message').value
-    };
-    
-    // Here you would normally send the data to a backend
-    // For now, we'll just show a success message
-    console.log('Form submitted:', formData);
-    
-    // Show success message
-    showNotification('Thank you! Your message has been received. We will contact you soon.', 'success');
-    
-    // Reset form
-    contactForm.reset();
-});
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Get submit button
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        
+        try {
+            // Send to PHP backend
+            const response = await fetch('send-email.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+            
+            // Get response text first
+            const responseText = await response.text();
+            console.log('Response text:', responseText);
+            
+            // Try to parse as JSON
+            let data;
+            try {
+                data = JSON.parse(responseText);
+            } catch (parseError) {
+                console.error('JSON parse error:', parseError);
+                console.error('Raw response:', responseText);
+                throw new Error('Invalid server response');
+            }
+            
+            if (data.success) {
+                // Show success message
+                showNotification(data.message || 'Thank you! Your message has been sent successfully.', 'success');
+                
+                // Reset form
+                contactForm.reset();
+            } else {
+                // Show error message
+                showNotification(data.message || 'There was an error sending your message.', 'error');
+                console.error('Server error:', data);
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            showNotification('Network error. Please email us directly at rsoml@phxxrising.org', 'error');
+        } finally {
+            // Re-enable button
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+        }
+    });
+}
 
 // Notification System
 function showNotification(message, type = 'info') {
